@@ -1,0 +1,23 @@
+{
+  "f2l": [
+    {"name": "Dd1", "solve": "R U' R' Dw R' U2 R U2' R' U R", "shuffle": "R' U' R U2 R' U2 R Dw' R U R'" },
+    {"name": "Dd2", "solve": "U R U' R' Dw' L' U L", "shuffle": "L' U' L Dw R U R' U'" },
+    {"name": "Dd3", "solve": "U' L' U L Dw R U' R'", "shuffle": "R U R' Dw' L' U' L U" }
+  ],
+
+  "oll": [
+    {"name": "1", "solve": "R U R' U R U2 R'", "shuffle": "R U2 R' U' R U' R'" },
+    {"name": "2", "solve": "R' U' R U' R' U2 R", "shuffle": "R' U2 R U R' U R" },
+    {"name": "3", "solve": "R U R' U R U' R' U R U2 R'", "shuffle": "R U2 R' U' R U R' U' R U' R'" },
+    {"name": "4", "solve": "R U2 R2 U' R2 U' R2 U2 R", "shuffle": "R' U2 R2 U R2 U R2 U2 R'" },
+    {"name": "5", "solve": "R' F' L F R F' L' F", "shuffle": "F' L F R' F' L' F R" },
+    {"name": "6", "solve": "Rw U R U' L' U R' U'", "shuffle": "U R U' L U  R' U' Rw'" },
+    {"name": "7", "solve": "R2 D' R U2 R' D R U2 R", "shuffle": "R' U2 R' D' R U2 R' D R2" }
+  ],
+
+  "pll": [
+    {"name": "U Clockwise", "solve": "R' U R' U' R' U' R' U R U R2", "shuffle": "R U2 R' U' R U' R'" },
+    {"name": "U Anticlockwise", "solve": "R2 U' R' U' R U R U R U' R", "shuffle": "R' U R' U' R' U' R' U R U R2" },
+    {"name": "A Clockwise", "solve": "x' L' U L' D2 L U' L' D2 L2 x", "shuffle": "x' L2 D2 L U L' D2 L U' L x" }
+  ]
+}
