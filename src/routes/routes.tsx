@@ -16,13 +16,33 @@ const Routes = () => {
   return (
     <NavigationContainer>
       <Navigator>
-        <Screen name="LandingPage" component={LandingPage}/>
 
-        <Screen name="SubMenuPage" component={SubMenuPage}/>
+        <Screen
+          name="LandingPage"
+          component={LandingPage}
+          options={{ title: 'Fridich Trainer' }}
+        />
 
-        <Screen name="ConfigPage" component={ConfigPage}/>
+        <Screen
+          name="SubMenuPage"
+          component={SubMenuPage}
+          // Typescript - just trust that title is in params object
+          options={({ route }) => ({ title: route.params!.title })}
+        />
 
-        <Screen name="StartPage" component={StartPage}/>
+        <Screen
+          name="ConfigPage"
+          component={ConfigPage}
+          // Typescript - just trust that title is in params object
+          options={({ route }) => ({ title: route.params!.title })}
+        />
+
+        <Screen
+          name="StartPage"
+          component={StartPage}
+          // Typescript - just trust that title is in params object
+          options={({ route }) => ({ title: route.params!.title })}
+        />
       </Navigator>
     </NavigationContainer>
   )

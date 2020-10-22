@@ -4,10 +4,11 @@ import { Text, View, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { RectButton } from 'react-native-gesture-handler'
 
-interface SubMenuPageProps{
+export interface SubMenuPageProps{
   route: {
     params: {
-      methodPhase: number
+      methodPhase: 'f2l' | 'oll' | 'pll',
+      title: string
     }
   }
 }
@@ -18,7 +19,7 @@ const SubMenuPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase
   return (
     <View style={styles.container}>
       <RectButton style={styles.buttons} onPress={() => {
-        navigate('ConfigPage', { methodPhase })
+        navigate('ConfigPage', { methodPhase, title: `Configuration - ${methodPhase.toUpperCase()}` })
       }}>
         <Text style={styles.texts}>Configurations</Text>
       </RectButton>
@@ -29,9 +30,9 @@ const SubMenuPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase
       </RectButton>
 
       <RectButton style={styles.buttons} onPress={() => {
-        navigate('StartPage', { methodPhase })
+        navigate('StartPage', { methodPhase, title: `Training - ${methodPhase.toUpperCase()}` })
       }}>
-        <Text style={styles.texts}>Start</Text>
+        <Text style={styles.texts}>Start training</Text>
       </RectButton>
     </View>
   )
@@ -45,11 +46,13 @@ const styles = StyleSheet.create({
   },
 
   buttons: {
+    justifyContent: 'center',
     alignItems: 'center',
 
-    width: '50%',
+    width: '70%',
+    height: '10%',
     padding: '5%',
-    backgroundColor: 'red',
+    backgroundColor: 'white',
     borderRadius: 10
   },
 

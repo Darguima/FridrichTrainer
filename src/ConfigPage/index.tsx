@@ -66,6 +66,7 @@ const ConfigPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase 
         <RectButton key={index} style={styles.caseButton} onPress={() => handleCaseButtonPress(item.name)}>
           <View>
             <Text style={styles.caseTitle}>Case {item.name}</Text>
+            <Text style={styles.caseShufle}>Solve: {item.solve}</Text>
             <Text style={styles.caseShufle}>Shufle: {item.shuffle}</Text>
           </View>
           <View>
