@@ -5,6 +5,7 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import AsyncStorage from '@react-native-community/async-storage'
 
 import fridich from '../fridich.json'
+import HeaderPage from '../Components/HeaderPage'
 
 interface selectedCasesSchema {
   'f2l': Array<string>,
@@ -61,20 +62,27 @@ const ConfigPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase 
   }
 
   return (
-    <ScrollView style={styles.container}>
-      {fridich[methodPhase].map((item, index) => (
-        <RectButton key={index} style={styles.caseButton} onPress={() => handleCaseButtonPress(item.name)}>
-          <View>
-            <Text style={styles.caseTitle}>Case {item.name}</Text>
-            <Text style={styles.caseShufle}>Solve: {item.solve}</Text>
-            <Text style={styles.caseShufle}>Shufle: {item.shuffle}</Text>
+
+    <>
+      <HeaderPage pageName={`${methodPhase.toUpperCase()} - Config Page`}/>
+
+      <ScrollView style={styles.container}>
+        {fridich[methodPhase].map((item, index) => (
+          <View key={index} style={styles.buttonsBorder}>
+            <RectButton style={styles.caseButton} onPress={() => handleCaseButtonPress(item.name)}>
+              <View>
+                <Text style={styles.caseTitle}>Case {item.name}</Text>
+                <Text style={styles.caseShufle}>Solve: {item.solve}</Text>
+                <Text style={styles.caseShufle}>Shufle: {item.shuffle}</Text>
+              </View>
+              <View>
+                {returnActualStatusOfCase(item.name)}
+              </View>
+            </RectButton>
           </View>
-          <View>
-            {returnActualStatusOfCase(item.name)}
-          </View>
-        </RectButton>
-      ))}
-    </ScrollView>
+        ))}
+      </ScrollView>
+    </>
   )
 }
 
@@ -83,11 +91,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee'
   },
 
-  caseButton: {
-    backgroundColor: '#fff',
+  buttonsBorder: {
     margin: '5%',
-    padding: '5%',
+
+    backgroundColor: 'white',
+
+    borderColor: '#ff9900',
+    borderWidth: 2,
     borderRadius: 10
+  },
+
+  caseButton: {
+    padding: '5%',
+
+    backgroundColor: '#fff',
+    borderRadius: 10
+
   },
 
   caseTitle: {

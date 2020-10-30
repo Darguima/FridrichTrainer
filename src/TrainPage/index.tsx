@@ -5,7 +5,10 @@ import { Text, View, StyleSheet } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 
 import fridich from '../fridich.json'
-import { RectButton } from 'react-native-gesture-handler'
+import { RectButton, BorderlessButton } from 'react-native-gesture-handler'
+
+import HeaderPage from '../Components/HeaderPage'
+import { Feather as Icon } from '@expo/vector-icons'
 
 interface fridichStepSchemaArrayItems {
   name: string,
@@ -21,15 +24,14 @@ interface SubMenuPageProps{
   }
 }
 
-const StartPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase } } }) => {
+const TrainPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase } } }) => {
   const [selectedCases, setSelectedCases] = useState<Array<string>>([] as Array<string>)
   const [casesArray, setCasesArray] = useState<Array<fridichStepSchemaArrayItems>>([{ name: 'Initial', shuffle: 'Initial', solve: 'Initial' }])
-
   const [caseOnScreen, setCaseOnScreen] = useState<fridichStepSchemaArrayItems>({ name: 'Initial', shuffle: 'Initial', solve: 'Initial' })
 
   const [revealedSolution, setRevealedSolution] = useState<true|false>(false)
 
-  const { goBack } = useNavigation()
+  const { goBack, navigate } = useNavigation()
 
   useEffect(() => {
     AsyncStorage.getItem('selectedCases').then(response => {
@@ -60,21 +62,33 @@ const StartPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase }
 
   return (
 
-    <View style={styles.container}>
-      { caseOnScreen.name === 'Initial' &&
+    <>
+      <HeaderPage pageName={`${methodPhase.toUpperCase()} - Train`}>
+        <BorderlessButton style={styles.headerConfigButton} onPress={() => {
+          navigate('ConfigPage', { methodPhase })
+        }}>
+          <Icon name="settings" color="#000" size={24} />
+        </BorderlessButton>
+      </HeaderPage>
+
+      <View style={styles.container}>
+
+        { caseOnScreen.name === 'Initial' &&
       <>
         <View style={styles.shufleContainer} >
           <Text style={styles.nameText}>{'Let\'s Start'}</Text>
           <Text style={styles.shufleText}>Press the button to start</Text>
         </View>
 
+        <View style={[styles.solveButtonContainer, { borderColor: '#ffffff00' }]} />
+
         <RectButton style={styles.nextShufleButton} onPress={sortAShufleFromCasesArray}>
           <Text style={styles.nextShufleButtonText}>Start Training</Text>
         </RectButton>
       </>
-      }
+        }
 
-      { caseOnScreen.name !== 'Initial' && caseOnScreen.name !== 'Final' &&
+        { caseOnScreen.name !== 'Initial' && caseOnScreen.name !== 'Final' &&
       <>
         <View style={styles.shufleContainer}>
           <Text style={styles.nameText}>Case {caseOnScreen.name}</Text>
@@ -98,25 +112,28 @@ const StartPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase }
         </View >
         }
 
-        <RectButton style={styles.nextShufleButton} onPress={sortAShufleFromCasesArray}>
+        <RectButton style={styles.nextShufleButton} onPress={() => { sortAShufleFromCasesArray(); setRevealedSolution(false) }}>
           <Text style={styles.nextShufleButtonText}>Next Shufle</Text>
         </RectButton>
       </>
-      }
+        }
 
-      { caseOnScreen.name === 'Final' &&
+        { caseOnScreen.name === 'Final' &&
       <>
         <View style={styles.shufleContainer}>
           <Text style={styles.nameText}>You have finished</Text>
           <Text style={styles.shufleText}>Press the button to finish</Text>
         </View>
 
+        <View style={[styles.solveButtonContainer, { borderColor: '#ffffff00' }]} />
+
         <RectButton style={styles.nextShufleButton} onPress={goBack}>
           <Text style={styles.nextShufleButtonText}>Return to menu</Text>
         </RectButton>
       </>
-      }
-    </View>
+        }
+      </View>
+    </>
 
   )
 }
@@ -128,8 +145,15 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
+  headerConfigButton: {
+    padding: '1%'
+  },
+
   shufleContainer: {
-    width: '80%'
+    width: '80%',
+
+    justifyContent: 'center'
+
   },
 
   nameText: {
@@ -147,9 +171,9 @@ const styles = StyleSheet.create({
     width: '80%',
 
     borderStyle: 'solid',
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 15
+    borderWidth: 2,
+    borderRadius: 15,
+    borderColor: '#ff9900'
   },
 
   solveButton: {
@@ -170,7 +194,7 @@ const styles = StyleSheet.create({
   nextShufleButton: {
     width: '80%',
 
-    backgroundColor: '#AAA',
+    backgroundColor: '#ff9900',
     padding: '5%',
     borderRadius: 15
   },
@@ -182,4 +206,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default StartPage
+export default TrainPage

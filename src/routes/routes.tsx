@@ -4,18 +4,16 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import LandingPage from '../LandingPage'
 
-import SubMenuPage from '../SubMenuPage'
+import TrainPage from '../TrainPage'
 
 import ConfigPage from '../ConfigPage'
-
-import StartPage from '../StartPage'
 
 const Routes = () => {
   const { Navigator, Screen } = createStackNavigator()
 
   return (
     <NavigationContainer>
-      <Navigator>
+      <Navigator screenOptions={{ headerShown: false }}>
 
         <Screen
           name="LandingPage"
@@ -24,25 +22,15 @@ const Routes = () => {
         />
 
         <Screen
-          name="SubMenuPage"
-          component={SubMenuPage}
-          // Typescript - just trust that title is in params object
-          options={({ route }) => ({ title: route.params!.title })}
+          name="TrainPage"
+          component={TrainPage}
         />
 
         <Screen
           name="ConfigPage"
           component={ConfigPage}
-          // Typescript - just trust that title is in params object
-          options={({ route }) => ({ title: route.params!.title })}
         />
 
-        <Screen
-          name="StartPage"
-          component={StartPage}
-          // Typescript - just trust that title is in params object
-          options={({ route }) => ({ title: route.params!.title })}
-        />
       </Navigator>
     </NavigationContainer>
   )

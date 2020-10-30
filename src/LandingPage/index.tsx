@@ -12,26 +12,32 @@ const LandingPage:React.FC = () => {
 
       <Image source={require('../assets/images/FridichTrainerlogo.png')} style={styles.logoIcon} />
 
-      <RectButton style={styles.buttons} onPress={() => {
-        navigate('SubMenuPage', { methodPhase: 'f2l', title: 'Fridich Trainer - F2L' })
-      }}>
-        <Text style={styles.titleTexts}>F2L</Text>
-        <Text style={styles.secondTexts}>First Two Layers</Text>
-      </RectButton>
+      <View style={styles.buttonsBorder}>
+        <RectButton style={styles.buttons} onPress={() => {
+          navigate('TrainPage', { methodPhase: 'f2l' })
+        }}>
+          <Text style={styles.buttonsTitleTexts}>F2L</Text>
+          <Text style={styles.buttonsSecondTexts}>First Two Layers</Text>
+        </RectButton>
+      </View>
 
-      <RectButton style={styles.buttons} onPress={() => {
-        navigate('SubMenuPage', { methodPhase: 'oll', title: 'Fridich Trainer - OLL' })
-      }}>
-        <Text style={styles.titleTexts}>OLL</Text>
-        <Text style={styles.secondTexts}>Orient Last Layer</Text>
-      </RectButton>
+      <View style={styles.buttonsBorder}>
+        <RectButton style={styles.buttons} onPress={() => {
+          navigate('TrainPage', { methodPhase: 'oll' })
+        }}>
+          <Text style={styles.buttonsTitleTexts}>OLL</Text>
+          <Text style={styles.buttonsSecondTexts}>Orient Last Layer</Text>
+        </RectButton>
+      </View>
 
-      <RectButton style={styles.buttons} onPress={() => {
-        navigate('SubMenuPage', { methodPhase: 'pll', title: 'Fridich Trainer - PLL' })
-      }}>
-        <Text style={styles.titleTexts}>PLL</Text>
-        <Text style={styles.secondTexts}>Permuting The Last Layer</Text>
-      </RectButton>
+      <View style={styles.buttonsBorder}>
+        <RectButton style={styles.buttons} onPress={() => {
+          navigate('TrainPage', { methodPhase: 'pll' })
+        }}>
+          <Text style={styles.buttonsTitleTexts}>PLL</Text>
+          <Text style={styles.buttonsSecondTexts}>Permuting The Last Layer</Text>
+        </RectButton>
+      </View>
 
     </View>
   )
@@ -50,23 +56,30 @@ const styles = StyleSheet.create({
     height: '16%'
   },
 
-  buttons: {
-    justifyContent: 'center',
-    alignItems: 'center',
-
+  buttonsBorder: {
     width: '70%',
     height: '10%',
-    padding: '5%',
     backgroundColor: 'white',
-    borderRadius: 10
+
+    borderRadius: 10,
+    borderColor: '#ff9900',
+    borderWidth: 3
   },
 
-  titleTexts: {
+  buttons: {
+    width: '100%',
+    height: '100%',
+
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  buttonsTitleTexts: {
     fontWeight: 'bold',
     fontSize: 16
   },
 
-  secondTexts: {
+  buttonsSecondTexts: {
     fontSize: 12
   }
 })
