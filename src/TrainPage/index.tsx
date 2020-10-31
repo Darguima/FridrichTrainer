@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
 import { Text, View, StyleSheet } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { RectButton, BorderlessButton } from 'react-native-gesture-handler'
 
 import AsyncStorage from '@react-native-community/async-storage'
-
 import fridich from '../fridich.json'
-import { RectButton, BorderlessButton } from 'react-native-gesture-handler'
 
 import HeaderPage from '../Components/HeaderPage'
 import { Feather as Icon } from '@expo/vector-icons'
+
+import { selectedCasesSchema } from '../ConfigPage'
 
 interface fridichStepSchemaArrayItems {
   name: string,
   solve: string,
   shuffle: string
+}
+
+interface casesArraySchema {
+  unsolved: Array<fridichStepSchemaArrayItems>,
+  solved: Array<fridichStepSchemaArrayItems>,
 }
 
 interface SubMenuPageProps{
@@ -25,8 +31,7 @@ interface SubMenuPageProps{
 }
 
 const TrainPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase } } }) => {
-  const [selectedCases, setSelectedCases] = useState<Array<string>>([] as Array<string>)
-  const [casesArray, setCasesArray] = useState<Array<fridichStepSchemaArrayItems>>([{ name: 'Initial', shuffle: 'Initial', solve: 'Initial' }])
+  const [casesArray, setCasesArray] = useState<casesArraySchema>({} as casesArraySchema)
   const [caseOnScreen, setCaseOnScreen] = useState<fridichStepSchemaArrayItems>({ name: 'Initial', shuffle: 'Initial', solve: 'Initial' })
 
   const [revealedSolution, setRevealedSolution] = useState<true|false>(false)
@@ -36,27 +41,40 @@ const TrainPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase }
   useEffect(() => {
     AsyncStorage.getItem('selectedCases').then(response => {
       if (response) {
-        setSelectedCases(JSON.parse(response)[methodPhase])
+        const selectedCases: selectedCasesSchema = JSON.parse(response)
+
+        const unsolvedCasesArray = fridich[methodPhase].filter(item => selectedCases[methodPhase].indexOf(item.name) !== -1)
+
+        // Shuffle the unsolvedCasesArray
+        for (var arrayIndex = unsolvedCasesArray.length - 1; arrayIndex > 0; arrayIndex--) {
+          var randomIndex = Math.floor(Math.random() * (arrayIndex + 1))
+          var temp = unsolvedCasesArray[arrayIndex]
+          unsolvedCasesArray[arrayIndex] = unsolvedCasesArray[randomIndex]
+          unsolvedCasesArray[randomIndex] = temp
+        }
+
+        setCasesArray({ unsolved: unsolvedCasesArray, solved: [] })
+      } else {
+        setCasesArray({ unsolved: [], solved: [] })
       }
     })
   }, [])
 
-  useEffect(() => {
-    setCasesArray(fridich[methodPhase].filter(item => selectedCases.indexOf(item.name) !== -1))
-  }, [selectedCases])
-
-  const sortAShufleFromCasesArray = () => {
-    const sortedCaseIndex = Math.floor(Math.random() * casesArray.length)
-    const sortedShufle = casesArray[sortedCaseIndex]
-
-    if (sortedShufle) {
-      setCaseOnScreen(sortedShufle)
-
-      setCasesArray(casesArray.filter(item => item !== sortedShufle))
-    }
-
-    if (casesArray.length === 0) {
+  const sortAShufleFromCasesArray = async () => {
+    if (casesArray.unsolved.length === 0) {
       setCaseOnScreen({ name: 'Final', shuffle: 'Final', solve: 'Final' })
+    } else {
+      setCaseOnScreen(casesArray.unsolved[0])
+
+      const newUnsolvedCasesArray: Array<fridichStepSchemaArrayItems> = casesArray.unsolved
+      const newSolvedCasesArray: Array<fridichStepSchemaArrayItems> = casesArray.solved
+
+      newSolvedCasesArray.push(newUnsolvedCasesArray[0])
+      newUnsolvedCasesArray.shift()
+
+      setCasesArray({ unsolved: newUnsolvedCasesArray, solved: newSolvedCasesArray })
+
+      console.log({ unsolved: newUnsolvedCasesArray, solved: newSolvedCasesArray })
     }
   }
 

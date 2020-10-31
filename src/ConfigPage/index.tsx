@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import fridich from '../fridich.json'
 import HeaderPage from '../Components/HeaderPage'
 
-interface selectedCasesSchema {
+export interface selectedCasesSchema {
   'f2l': Array<string>,
   'oll': Array<string>,
   'pll': Array<string>,
