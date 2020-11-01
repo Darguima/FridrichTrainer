@@ -16,7 +16,7 @@ export interface selectedCasesSchema {
   'pll': Array<string>,
 }
 
-interface SubMenuPageProps{
+interface TrainPageProps{
   route: {
     params: {
       methodPhase: 'f2l' | 'oll' | 'pll'
@@ -24,7 +24,7 @@ interface SubMenuPageProps{
   }
 }
 
-const TrainPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase } } }) => {
+const TrainPage:React.FC<TrainPageProps> = ({ route: { params: { methodPhase } } }) => {
   const { casesArray, setCasesArray } = useCasesArray()
   const [caseOnScreen, setCaseOnScreen] = useState<fridichCaseSchema>({ name: 'Initial', shuffle: 'Initial', solve: 'Initial' })
 
@@ -75,6 +75,12 @@ const TrainPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase }
     <>
       <HeaderPage pageName={`${methodPhase.toUpperCase()} - Train`}>
         <BorderlessButton style={styles.headerConfigButton} onPress={() => {
+          navigate('ListCasesArrayPage', { methodPhase })
+        }}>
+          <Icon name="menu" color="#000" size={24} />
+        </BorderlessButton>
+
+        <BorderlessButton style={styles.headerConfigButton} onPress={() => {
           navigate('ConfigPage', { methodPhase })
         }}>
           <Icon name="settings" color="#000" size={24} />
@@ -101,6 +107,8 @@ const TrainPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase }
         { caseOnScreen.name !== 'Initial' && caseOnScreen.name !== 'Final' &&
       <>
         <View style={styles.shufleContainer}>
+          <Text style={styles.caseNumber}>Case {casesArray.solved.length} of {casesArray.solved.length + casesArray.unsolved.length}</Text>
+
           <Text style={styles.nameText}>Case {caseOnScreen.name}</Text>
           <Text style={styles.shufleText}>{caseOnScreen.shuffle}</Text>
         </View>
@@ -164,6 +172,13 @@ const styles = StyleSheet.create({
 
     justifyContent: 'center'
 
+  },
+
+  caseNumber: {
+    fontSize: 14,
+    textAlign: 'center',
+
+    paddingBottom: 15
   },
 
   nameText: {

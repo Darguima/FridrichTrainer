@@ -10,7 +10,7 @@ import HeaderPage from '../Components/HeaderPage'
 
 import { selectedCasesSchema } from '../TrainPage'
 
-interface SubMenuPageProps{
+interface ConfigPageProps{
   route: {
     params: {
       methodPhase: 'f2l' | 'oll' | 'pll'
@@ -18,7 +18,7 @@ interface SubMenuPageProps{
   }
 }
 
-const ConfigPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase } } }) => {
+const ConfigPage:React.FC<ConfigPageProps> = ({ route: { params: { methodPhase } } }) => {
   const [selectedCases, setSelectedCases] = useState<selectedCasesSchema>({
     f2l: [],
     oll: [],

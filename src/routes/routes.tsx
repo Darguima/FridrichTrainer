@@ -6,6 +6,8 @@ import LandingPage from '../LandingPage'
 
 import TrainPage from '../TrainPage'
 
+import ListCasesArrayPage from '../ListCasesArrayPage'
+
 import ConfigPage from '../ConfigPage'
 
 const Routes = () => {
@@ -24,6 +26,11 @@ const Routes = () => {
         <Screen
           name="TrainPage"
           component={TrainPage}
+        />
+
+        <Screen
+          name="ListCasesArrayPage"
+          component={ListCasesArrayPage}
         />
 
         <Screen
