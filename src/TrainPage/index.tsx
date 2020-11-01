@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { RectButton, BorderlessButton } from 'react-native-gesture-handler'
 
 import AsyncStorage from '@react-native-community/async-storage'
+import useCasesArray, { fridichCaseSchema } from '../contexts/casesArray'
 import fridich from '../fridich.json'
 
 import HeaderPage from '../Components/HeaderPage'
 import { Feather as Icon } from '@expo/vector-icons'
 
-import { selectedCasesSchema } from '../ConfigPage'
-
-interface fridichStepSchemaArrayItems {
-  name: string,
-  solve: string,
-  shuffle: string
-}
-
-interface casesArraySchema {
-  unsolved: Array<fridichStepSchemaArrayItems>,
-  solved: Array<fridichStepSchemaArrayItems>,
+export interface selectedCasesSchema {
+  'f2l': Array<string>,
+  'oll': Array<string>,
+  'pll': Array<string>,
 }
 
 interface SubMenuPageProps{
@@ -31,8 +25,8 @@ interface SubMenuPageProps{
 }
 
 const TrainPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase } } }) => {
-  const [casesArray, setCasesArray] = useState<casesArraySchema>({} as casesArraySchema)
-  const [caseOnScreen, setCaseOnScreen] = useState<fridichStepSchemaArrayItems>({ name: 'Initial', shuffle: 'Initial', solve: 'Initial' })
+  const { casesArray, setCasesArray } = useCasesArray()
+  const [caseOnScreen, setCaseOnScreen] = useState<fridichCaseSchema>({ name: 'Initial', shuffle: 'Initial', solve: 'Initial' })
 
   const [revealedSolution, setRevealedSolution] = useState<true|false>(false)
 
@@ -66,15 +60,13 @@ const TrainPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase }
     } else {
       setCaseOnScreen(casesArray.unsolved[0])
 
-      const newUnsolvedCasesArray: Array<fridichStepSchemaArrayItems> = casesArray.unsolved
-      const newSolvedCasesArray: Array<fridichStepSchemaArrayItems> = casesArray.solved
+      const newUnsolvedCasesArray: Array<fridichCaseSchema> = casesArray.unsolved
+      const newSolvedCasesArray: Array<fridichCaseSchema> = casesArray.solved
 
       newSolvedCasesArray.push(newUnsolvedCasesArray[0])
       newUnsolvedCasesArray.shift()
 
       setCasesArray({ unsolved: newUnsolvedCasesArray, solved: newSolvedCasesArray })
-
-      console.log({ unsolved: newUnsolvedCasesArray, solved: newSolvedCasesArray })
     }
   }
 

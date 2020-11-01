@@ -3,15 +3,12 @@ import { Text, View, StyleSheet } from 'react-native'
 import { RectButton, ScrollView } from 'react-native-gesture-handler'
 
 import AsyncStorage from '@react-native-community/async-storage'
+import useCasesArray, { fridichCaseSchema } from '../contexts/casesArray'
 
 import fridich from '../fridich.json'
 import HeaderPage from '../Components/HeaderPage'
 
-export interface selectedCasesSchema {
-  'f2l': Array<string>,
-  'oll': Array<string>,
-  'pll': Array<string>,
-}
+import { selectedCasesSchema } from '../TrainPage'
 
 interface SubMenuPageProps{
   route: {
@@ -28,6 +25,8 @@ const ConfigPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase 
     pll: []
   })
 
+  const { casesArray, setCasesArray } = useCasesArray()
+
   useEffect(() => {
     AsyncStorage.getItem('selectedCases').then(response => {
       if (response) {
@@ -38,10 +37,23 @@ const ConfigPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase 
   }, [])
 
   const handleCaseButtonPress = (caseName: string) => {
-    if (selectedCases[methodPhase].indexOf(caseName) < 0) {
+    if (selectedCases[methodPhase].indexOf(caseName) === -1) {
       setSelectedCases({ ...selectedCases, [methodPhase]: [...selectedCases[methodPhase], caseName] })
 
       AsyncStorage.setItem('selectedCases', JSON.stringify({ ...selectedCases, [methodPhase]: [...selectedCases[methodPhase], caseName] }))
+
+      // Add this shuffle to the casesArrayContext
+      const shufle = fridich[methodPhase].find(item => item.name === caseName)
+
+      // To prevent ;)
+      if (shufle) {
+        const newUnsolvedCasesArray: Array<fridichCaseSchema> = casesArray.unsolved
+        var randomIndex = Math.floor(Math.random() * (newUnsolvedCasesArray.length + 1))
+
+        newUnsolvedCasesArray.splice(randomIndex, 0, shufle)
+
+        setCasesArray({ solved: casesArray.solved, unsolved: newUnsolvedCasesArray })
+      }
     } else {
       let newStepArray: Array<string> = [...selectedCases[methodPhase], caseName]
 
@@ -50,6 +62,25 @@ const ConfigPage:React.FC<SubMenuPageProps> = ({ route: { params: { methodPhase 
       setSelectedCases({ ...selectedCases, [methodPhase]: newStepArray })
 
       AsyncStorage.setItem('selectedCases', JSON.stringify({ ...selectedCases, [methodPhase]: newStepArray }))
+
+      // Remove this shuffle on the casesArrayContext
+      const shufle = fridich[methodPhase].find(item => item.name === caseName)
+
+      // To prevent ;)
+      if (shufle) {
+        const newSolvedCasesArray: Array<fridichCaseSchema> = casesArray.solved
+        const newUnsolvedCasesArray: Array<fridichCaseSchema> = casesArray.unsolved
+
+        if (newSolvedCasesArray.indexOf(shufle) !== -1) {
+          newSolvedCasesArray.splice(newSolvedCasesArray.indexOf(shufle), 1)
+        }
+
+        if (newUnsolvedCasesArray.indexOf(shufle) !== -1) {
+          newUnsolvedCasesArray.splice(newUnsolvedCasesArray.indexOf(shufle), 1)
+        }
+
+        setCasesArray({ solved: newSolvedCasesArray, unsolved: newUnsolvedCasesArray })
+      }
     }
   }
 
