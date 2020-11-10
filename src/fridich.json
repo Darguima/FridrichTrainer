@@ -54,7 +54,7 @@
     {"name": "3", "solve": "R U R' U R U' R' U R U2 R'", "shuffle": "R U2 R' U' R U R' U' R U' R'" },
     {"name": "4", "solve": "R U2 R2 U' R2 U' R2 U2 R", "shuffle": "R' U2 R2 U R2 U R2 U2 R'" },
     {"name": "5", "solve": "R' F' L F R F' L' F", "shuffle": "F' L F R' F' L' F R" },
-    {"name": "6", "solve": "Rw U R U' L' U R' U'", "shuffle": "U R U' L U  R' U' Rw'" },
+    {"name": "6", "solve": "Rw U R U' L' U R' U'", "shuffle": "R' F' L F R F' L' F" },
     {"name": "7", "solve": "R2 D' R U2 R' D R U2 R", "shuffle": "R' U2 R' D' R U2 R' D R2" },
     {"name": "8", "solve": "R U R' U' R' F R F'", "shuffle": "F R' F' R U R U' R'" },
     {"name": "9", "solve": "F R U R' U' F'", "shuffle": "F U R U' R' F'" },

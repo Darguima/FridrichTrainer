@@ -43,14 +43,14 @@ const ConfigPage:React.FC<ConfigPageProps> = ({ route: { params: { methodPhase }
       AsyncStorage.setItem('selectedCases', JSON.stringify({ ...selectedCases, [methodPhase]: [...selectedCases[methodPhase], caseName] }))
 
       // Add this shuffle to the casesArrayContext
-      const shufle = fridich[methodPhase].find(item => item.name === caseName)
+      var shufle = fridich[methodPhase].find(item => item.name === caseName)
 
       // To prevent ;)
       if (shufle) {
         const newUnsolvedCasesArray: Array<fridichCaseSchema> = casesArray.unsolved
         var randomIndex = Math.floor(Math.random() * (newUnsolvedCasesArray.length + 1))
 
-        newUnsolvedCasesArray.splice(randomIndex, 0, shufle)
+        newUnsolvedCasesArray.splice(randomIndex, 0, { ...shufle, solved: false })
 
         setCasesArray({ solved: casesArray.solved, unsolved: newUnsolvedCasesArray })
       }
@@ -71,12 +71,12 @@ const ConfigPage:React.FC<ConfigPageProps> = ({ route: { params: { methodPhase }
         const newSolvedCasesArray: Array<fridichCaseSchema> = casesArray.solved
         const newUnsolvedCasesArray: Array<fridichCaseSchema> = casesArray.unsolved
 
-        if (newSolvedCasesArray.indexOf(shufle) !== -1) {
-          newSolvedCasesArray.splice(newSolvedCasesArray.indexOf(shufle), 1)
+        if (newSolvedCasesArray.indexOf({ ...shufle, solved: false }) !== -1) {
+          newSolvedCasesArray.splice(newSolvedCasesArray.indexOf({ ...shufle, solved: false }), 1)
         }
 
-        if (newUnsolvedCasesArray.indexOf(shufle) !== -1) {
-          newUnsolvedCasesArray.splice(newUnsolvedCasesArray.indexOf(shufle), 1)
+        if (newUnsolvedCasesArray.indexOf({ ...shufle, solved: false }) !== -1) {
+          newUnsolvedCasesArray.splice(newUnsolvedCasesArray.indexOf({ ...shufle, solved: false }), 1)
         }
 
         setCasesArray({ solved: newSolvedCasesArray, unsolved: newUnsolvedCasesArray })

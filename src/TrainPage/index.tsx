@@ -25,8 +25,9 @@ interface TrainPageProps{
 }
 
 const TrainPage:React.FC<TrainPageProps> = ({ route: { params: { methodPhase } } }) => {
-  const { casesArray, setCasesArray } = useCasesArray()
-  const [caseOnScreen, setCaseOnScreen] = useState<fridichCaseSchema>({ name: 'Initial', shuffle: 'Initial', solve: 'Initial' })
+  const { casesArray, setCasesArray, caseOnScreen, setCaseOnScreen } = useCasesArray()
+
+  useEffect(() => setCaseOnScreen({ name: 'Initial', shuffle: 'Initial', solve: 'Initial', solved: true }), [])
 
   const [revealedSolution, setRevealedSolution] = useState<true|false>(false)
 
@@ -37,7 +38,9 @@ const TrainPage:React.FC<TrainPageProps> = ({ route: { params: { methodPhase } }
       if (response) {
         const selectedCases: selectedCasesSchema = JSON.parse(response)
 
-        const unsolvedCasesArray = fridich[methodPhase].filter(item => selectedCases[methodPhase].indexOf(item.name) !== -1)
+        const unsolvedCasesArray = fridich[methodPhase]
+          .filter(item => selectedCases[methodPhase].indexOf(item.name) !== -1)
+          .map(item => ({ ...item, solved: false }))
 
         // Shuffle the unsolvedCasesArray
         for (var arrayIndex = unsolvedCasesArray.length - 1; arrayIndex > 0; arrayIndex--) {
@@ -55,18 +58,28 @@ const TrainPage:React.FC<TrainPageProps> = ({ route: { params: { methodPhase } }
   }, [])
 
   const sortAShufleFromCasesArray = async () => {
-    if (casesArray.unsolved.length === 0) {
-      setCaseOnScreen({ name: 'Final', shuffle: 'Final', solve: 'Final' })
-    } else {
-      setCaseOnScreen(casesArray.unsolved[0])
-
+    if (casesArray.unsolved.length === 1) {
       const newUnsolvedCasesArray: Array<fridichCaseSchema> = casesArray.unsolved
       const newSolvedCasesArray: Array<fridichCaseSchema> = casesArray.solved
 
-      newSolvedCasesArray.push(newUnsolvedCasesArray[0])
+      newSolvedCasesArray.push({ ...newUnsolvedCasesArray[0], solved: true })
       newUnsolvedCasesArray.shift()
 
       setCasesArray({ unsolved: newUnsolvedCasesArray, solved: newSolvedCasesArray })
+
+      setCaseOnScreen({ name: 'Final', shuffle: 'Final', solve: 'Final', solved: true })
+    } else {
+      if (caseOnScreen.name !== 'Initial') {
+        const newUnsolvedCasesArray: Array<fridichCaseSchema> = casesArray.unsolved
+        const newSolvedCasesArray: Array<fridichCaseSchema> = casesArray.solved
+
+        newSolvedCasesArray.push({ ...newUnsolvedCasesArray[0], solved: true })
+        newUnsolvedCasesArray.shift()
+
+        setCasesArray({ unsolved: newUnsolvedCasesArray, solved: newSolvedCasesArray })
+      }
+
+      setCaseOnScreen(casesArray.unsolved[0])
     }
   }
 
@@ -107,7 +120,7 @@ const TrainPage:React.FC<TrainPageProps> = ({ route: { params: { methodPhase } }
         { caseOnScreen.name !== 'Initial' && caseOnScreen.name !== 'Final' &&
       <>
         <View style={styles.shufleContainer}>
-          <Text style={styles.caseNumber}>Case {casesArray.solved.length} of {casesArray.solved.length + casesArray.unsolved.length}</Text>
+          <Text style={styles.caseNumber}>Case {casesArray.solved.length + 1} of {casesArray.solved.length + casesArray.unsolved.length}</Text>
 
           <Text style={styles.nameText}>Case {caseOnScreen.name}</Text>
           <Text style={styles.shufleText}>{caseOnScreen.shuffle}</Text>
