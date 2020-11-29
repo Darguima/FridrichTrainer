@@ -1,6 +1,6 @@
 {
   "name": "fridich_trainer",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A ReactNative application that will help you train the Fridich method of the Rubik's Cube.",
   "repository": {
     "type": "git",
@@ -19,7 +19,6 @@
   "bugs": {
     "url": "https://github.com/Darguima/FridichTrainer/issues"
   },
-
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -44,6 +43,7 @@
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.4",
     "react-native-screens": "~2.10.1",
+    "react-native-svg": "^12.1.0",
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {

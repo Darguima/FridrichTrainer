@@ -10,6 +10,11 @@ import fridich from '../fridich.json'
 import HeaderPage from '../Components/HeaderPage'
 import { Feather as Icon } from '@expo/vector-icons'
 
+import { SvgXml } from 'react-native-svg'
+import f2lSimulation from '../f2l_simulation.json'
+import ollSimulation from '../oll_simulation.json'
+import pllSimulation from '../pll_simulation.json'
+
 export interface selectedCasesSchema {
   'f2l': Array<string>,
   'oll': Array<string>,
@@ -30,6 +35,7 @@ const TrainPage:React.FC<TrainPageProps> = ({ route: { params: { methodPhase } }
   useEffect(() => setCaseOnScreen({ name: 'Initial', shuffle: 'Initial', solve: 'Initial', solved: true }), [])
 
   const [revealedSolution, setRevealedSolution] = useState<true|false>(false)
+  const [revealedCube, setRevealedCube] = useState<true|false>(false)
 
   const { goBack, navigate } = useNavigation()
 
@@ -126,6 +132,39 @@ const TrainPage:React.FC<TrainPageProps> = ({ route: { params: { methodPhase } }
           <Text style={styles.shufleText}>{caseOnScreen.shuffle}</Text>
         </View>
 
+        { !revealedCube &&
+        <View style={styles.cubeRevealButtonContainer}>
+          <RectButton style={styles.cubeRevealButton} onPress={() => (setRevealedCube(!revealedCube))}>
+            <Text style={styles.cubeRevealButtonText}>Show cube</Text>
+          </RectButton>
+        </View >
+        }
+
+        { revealedCube &&
+        <View style={styles.cubeRevealButtonContainer}>
+          <RectButton style={styles.cubeRevealButton} onPress={() => (setRevealedCube(!revealedCube))}>
+            <SvgXml
+
+              style={[methodPhase === 'f2l' ? { marginVertical: 0 } : { marginVertical: '4%' }, styles.cubeRevealSvg] }
+
+              height={methodPhase === 'f2l' ? 175 : 100}
+              width={methodPhase === 'f2l' ? 175 : 100}
+              viewBox={methodPhase === 'f2l' ? '0 0 142 106' : '0 0 38 38'}
+              xml={(() => {
+                /* Ignore the Typescripts errosrerrors, this is secure and final point */
+                if (methodPhase === 'f2l') {
+                  return f2lSimulation[caseOnScreen.name]
+                } else if (methodPhase === 'oll') {
+                  return ollSimulation[caseOnScreen.name]
+                } else if (methodPhase === 'pll') {
+                  return pllSimulation[caseOnScreen.name]
+                }
+              })() || ''}
+            />
+          </RectButton>
+        </View >
+        }
+
         { !revealedSolution &&
         <View style={styles.solveButtonContainer}>
           <RectButton style={styles.solveButton} onPress={() => (setRevealedSolution(!revealedSolution))}>
@@ -143,7 +182,7 @@ const TrainPage:React.FC<TrainPageProps> = ({ route: { params: { methodPhase } }
         </View >
         }
 
-        <RectButton style={styles.nextShufleButton} onPress={() => { sortAShufleFromCasesArray(); setRevealedSolution(false) }}>
+        <RectButton style={styles.nextShufleButton} onPress={() => { sortAShufleFromCasesArray(); setRevealedSolution(false); setRevealedCube(false) }}>
           <Text style={styles.nextShufleButtonText}>Next Shufle</Text>
         </RectButton>
       </>
@@ -202,6 +241,29 @@ const styles = StyleSheet.create({
   shufleText: {
     fontWeight: 'bold',
     fontSize: 20,
+    textAlign: 'center'
+  },
+
+  cubeRevealButtonContainer: {
+    width: '80%',
+
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderRadius: 15,
+    borderColor: '#ff9900'
+  },
+
+  cubeRevealButton: {
+    padding: '5%',
+    alignItems: 'center'
+
+  },
+
+  cubeRevealSvg: {
+  },
+
+  cubeRevealButtonText: {
+    fontSize: 16,
     textAlign: 'center'
   },
 
