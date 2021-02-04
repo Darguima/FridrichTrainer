@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
 
-export interface fridichCaseSchema {
+export interface fridrichCaseSchema {
   name: string,
   solve: string,
   shuffle: string,
@@ -8,22 +8,22 @@ export interface fridichCaseSchema {
 }
 
 export interface casesArraySchema {
-  unsolved: Array<fridichCaseSchema>,
-  solved: Array<fridichCaseSchema>,
+  unsolved: Array<fridrichCaseSchema>,
+  solved: Array<fridrichCaseSchema>,
 }
 
 interface CasesArrayContextData {
   casesArray: casesArraySchema,
   setCasesArray: React.Dispatch<React.SetStateAction<casesArraySchema>>,
-  caseOnScreen: fridichCaseSchema,
-  setCaseOnScreen: React.Dispatch<React.SetStateAction<fridichCaseSchema>>
+  caseOnScreen: fridrichCaseSchema,
+  setCaseOnScreen: React.Dispatch<React.SetStateAction<fridrichCaseSchema>>
 }
 
 const CasesArrayContext = createContext<CasesArrayContextData>({} as CasesArrayContextData)
 
 export const CasesArrayProvider: React.FC = ({ children }) => {
   const [casesArray, setCasesArray] = useState<casesArraySchema>({} as casesArraySchema)
-  const [caseOnScreen, setCaseOnScreen] = useState<fridichCaseSchema>({ name: 'Initial', shuffle: 'Initial', solve: 'Initial', solved: true })
+  const [caseOnScreen, setCaseOnScreen] = useState<fridrichCaseSchema>({ name: 'Initial', shuffle: 'Initial', solve: 'Initial', solved: true })
 
   return (
     <CasesArrayContext.Provider value={{ casesArray, setCasesArray, caseOnScreen, setCaseOnScreen }}>

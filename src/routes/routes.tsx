@@ -20,7 +20,7 @@ const Routes = () => {
         <Screen
           name="LandingPage"
           component={LandingPage}
-          options={{ title: 'Fridich Trainer' }}
+          options={{ title: 'Fridrich Trainer' }}
         />
 
         <Screen

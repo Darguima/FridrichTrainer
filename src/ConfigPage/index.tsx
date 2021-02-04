@@ -3,9 +3,9 @@ import { Text, View, StyleSheet } from 'react-native'
 import { RectButton, ScrollView } from 'react-native-gesture-handler'
 
 import AsyncStorage from '@react-native-community/async-storage'
-import useCasesArray, { fridichCaseSchema } from '../contexts/casesArray'
+import useCasesArray, { fridrichCaseSchema } from '../contexts/casesArray'
 
-import fridich from '../fridich.json'
+import fridrich from '../fridrich.json'
 import HeaderPage from '../Components/HeaderPage'
 
 import { selectedCasesSchema } from '../TrainPage'
@@ -43,11 +43,11 @@ const ConfigPage:React.FC<ConfigPageProps> = ({ route: { params: { methodPhase }
       AsyncStorage.setItem('selectedCases', JSON.stringify({ ...selectedCases, [methodPhase]: [...selectedCases[methodPhase], caseName] }))
 
       // Add this shuffle to the casesArrayContext
-      var shufle = fridich[methodPhase].find(item => item.name === caseName)
+      var shufle = fridrich[methodPhase].find(item => item.name === caseName)
 
       // To prevent ;)
       if (shufle) {
-        const newUnsolvedCasesArray: Array<fridichCaseSchema> = casesArray.unsolved
+        const newUnsolvedCasesArray: Array<fridrichCaseSchema> = casesArray.unsolved
         var randomIndex = Math.floor(Math.random() * (newUnsolvedCasesArray.length + 1))
 
         newUnsolvedCasesArray.splice(randomIndex, 0, { ...shufle, solved: false })
@@ -64,12 +64,12 @@ const ConfigPage:React.FC<ConfigPageProps> = ({ route: { params: { methodPhase }
       AsyncStorage.setItem('selectedCases', JSON.stringify({ ...selectedCases, [methodPhase]: newStepArray }))
 
       // Remove this shuffle on the casesArrayContext
-      const shufle = fridich[methodPhase].find(item => item.name === caseName)
+      const shufle = fridrich[methodPhase].find(item => item.name === caseName)
 
       // To prevent ;)
       if (shufle) {
-        const newSolvedCasesArray: Array<fridichCaseSchema> = casesArray.solved
-        const newUnsolvedCasesArray: Array<fridichCaseSchema> = casesArray.unsolved
+        const newSolvedCasesArray: Array<fridrichCaseSchema> = casesArray.solved
+        const newUnsolvedCasesArray: Array<fridrichCaseSchema> = casesArray.unsolved
 
         if (newSolvedCasesArray.indexOf({ ...shufle, solved: false }) !== -1) {
           newSolvedCasesArray.splice(newSolvedCasesArray.indexOf({ ...shufle, solved: false }), 1)
@@ -98,7 +98,7 @@ const ConfigPage:React.FC<ConfigPageProps> = ({ route: { params: { methodPhase }
       <HeaderPage pageName={`${methodPhase.toUpperCase()} - Config Page`}/>
 
       <ScrollView style={styles.container}>
-        {fridich[methodPhase].map((item, index) => (
+        {fridrich[methodPhase].map((item, index) => (
           <View key={index} style={styles.buttonsBorder}>
             <RectButton style={styles.caseButton} onPress={() => handleCaseButtonPress(item.name)}>
               <View>

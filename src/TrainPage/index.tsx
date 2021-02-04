@@ -4,8 +4,8 @@ import { useNavigation } from '@react-navigation/native'
 import { RectButton, BorderlessButton } from 'react-native-gesture-handler'
 
 import AsyncStorage from '@react-native-community/async-storage'
-import useCasesArray, { fridichCaseSchema } from '../contexts/casesArray'
-import fridich from '../fridich.json'
+import useCasesArray, { fridrichCaseSchema } from '../contexts/casesArray'
+import fridrich from '../fridrich.json'
 
 import HeaderPage from '../Components/HeaderPage'
 import { Feather as Icon } from '@expo/vector-icons'
@@ -44,7 +44,7 @@ const TrainPage:React.FC<TrainPageProps> = ({ route: { params: { methodPhase } }
       if (response) {
         const selectedCases: selectedCasesSchema = JSON.parse(response)
 
-        const unsolvedCasesArray = fridich[methodPhase]
+        const unsolvedCasesArray = fridrich[methodPhase]
           .filter(item => selectedCases[methodPhase].indexOf(item.name) !== -1)
           .map(item => ({ ...item, solved: false }))
 
@@ -65,8 +65,8 @@ const TrainPage:React.FC<TrainPageProps> = ({ route: { params: { methodPhase } }
 
   const sortAShufleFromCasesArray = async () => {
     if (casesArray.unsolved.length === 1) {
-      const newUnsolvedCasesArray: Array<fridichCaseSchema> = casesArray.unsolved
-      const newSolvedCasesArray: Array<fridichCaseSchema> = casesArray.solved
+      const newUnsolvedCasesArray: Array<fridrichCaseSchema> = casesArray.unsolved
+      const newSolvedCasesArray: Array<fridrichCaseSchema> = casesArray.solved
 
       newSolvedCasesArray.push({ ...newUnsolvedCasesArray[0], solved: true })
       newUnsolvedCasesArray.shift()
@@ -76,8 +76,8 @@ const TrainPage:React.FC<TrainPageProps> = ({ route: { params: { methodPhase } }
       setCaseOnScreen({ name: 'Final', shuffle: 'Final', solve: 'Final', solved: true })
     } else {
       if (caseOnScreen.name !== 'Initial') {
-        const newUnsolvedCasesArray: Array<fridichCaseSchema> = casesArray.unsolved
-        const newSolvedCasesArray: Array<fridichCaseSchema> = casesArray.solved
+        const newUnsolvedCasesArray: Array<fridrichCaseSchema> = casesArray.unsolved
+        const newSolvedCasesArray: Array<fridrichCaseSchema> = casesArray.solved
 
         newSolvedCasesArray.push({ ...newUnsolvedCasesArray[0], solved: true })
         newUnsolvedCasesArray.shift()

@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "FridichTrainer",
-    "slug": "FridichTrainer",
-    "version": "1.2.0",
+    "name": "FridrichTrainer",
+    "slug": "FridrichTrainer",
+    "version": "1.2.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -25,7 +25,7 @@
     },
 
     "android": {
-      "package": "com.fridichTrainer.fridichTrainer"
+      "package": "com.fridrichTrainer.fridrichTrainer"
     }
   }
 }

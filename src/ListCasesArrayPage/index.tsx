@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, GestureResponderEvent } from 'react-native'
 
 import HeaderPage from '../Components/HeaderPage'
 
-import useCasesArray, { fridichCaseSchema } from '../contexts/casesArray'
+import useCasesArray, { fridrichCaseSchema } from '../contexts/casesArray'
 
 import { Feather as Icon } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -20,9 +20,9 @@ interface ListCasesArrayPageProps{
 const ListCasesArrayPage:React.FC<ListCasesArrayPageProps> = ({ route: { params: { methodPhase } } }) => {
   const { casesArray, setCasesArray, caseOnScreen } = useCasesArray()
 
-  const saveNewData = ({ data }: { data:Array<fridichCaseSchema>}) => {
-    const newSolvedCasesArray: Array<fridichCaseSchema> = []
-    const newUnsolvedCasesArray: Array<fridichCaseSchema> = []
+  const saveNewData = ({ data }: { data:Array<fridrichCaseSchema>}) => {
+    const newSolvedCasesArray: Array<fridrichCaseSchema> = []
+    const newUnsolvedCasesArray: Array<fridrichCaseSchema> = []
 
     var recordingSolvedCases = caseOnScreen.name !== 'Initial'
 
@@ -50,7 +50,7 @@ const ListCasesArrayPage:React.FC<ListCasesArrayPageProps> = ({ route: { params:
       <>
         <DraggableFlatList
           data={[...casesArray.solved, ...casesArray.unsolved]}
-          renderItem={({ item, drag }: {item: fridichCaseSchema, drag: (event: GestureResponderEvent) => void}) => {
+          renderItem={({ item, drag }: {item: fridrichCaseSchema, drag: (event: GestureResponderEvent) => void}) => {
             return (
               <TouchableOpacity
                 key={item.name}

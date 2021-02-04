@@ -10,7 +10,7 @@ const LandingPage:React.FC = () => {
   return (
     <View style={styles.container}>
 
-      <Image source={require('../assets/images/FridichTrainerlogo.png')} style={styles.logoIcon} />
+      <Image source={require('../assets/images/FridrichTrainerlogo.png')} style={styles.logoIcon} />
 
       <View style={styles.buttonsBorder}>
         <RectButton style={styles.buttons} onPress={() => {
