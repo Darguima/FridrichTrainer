@@ -64,7 +64,7 @@ const TrainPage:React.FC<TrainPageProps> = ({ route: { params: { methodPhase } }
   }, [])
 
   const sortAShufleFromCasesArray = async () => {
-    if (casesArray.unsolved.length === 1) {
+    if (casesArray.unsolved.length === 1 && casesArray.solved.length !== 0) {
       const newUnsolvedCasesArray: Array<fridrichCaseSchema> = casesArray.unsolved
       const newSolvedCasesArray: Array<fridrichCaseSchema> = casesArray.solved
 
@@ -85,7 +85,7 @@ const TrainPage:React.FC<TrainPageProps> = ({ route: { params: { methodPhase } }
         setCasesArray({ unsolved: newUnsolvedCasesArray, solved: newSolvedCasesArray })
       }
 
-      setCaseOnScreen(casesArray.unsolved[0])
+      setCaseOnScreen(casesArray.unsolved[0] || { name: 'Final', shuffle: 'Final', solve: 'Final', solved: true })
     }
   }
 
