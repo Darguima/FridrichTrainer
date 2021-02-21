@@ -1,7 +1,7 @@
 {
   "name": "fridrich_trainer",
-  "version": "1.2.1",
-  "description": "A ReactNative application that will help you train the Fridrich method of the Rubik's Cube.",
+  "version": "1.3.0",
+  "description": "Fridrich Trainer is an app to practice the most famous method to solve the Rubik's Cube. To improve since the F2L to the OLL and the PLL. All in one simple and intuitive application. Fridrich Trainer is also an open-source project so is possible anyone help since reporting bugs, writing code, documentation, giving ideas or just checking the homepage.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Darguima/FridrichTrainer.git"
