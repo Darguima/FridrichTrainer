@@ -1,78 +1,69 @@
-<h1 align="center">
-	<a href="https://www.github.com/Darguima/FridrichTrainer">
-		<img alt="Fridrich Trainer" src="./readme/FridrichTrainerLogoHorizontal_500.png" width="350px">
-	</a>
-</h1>
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/darguima/FridrichTrainer">
+    <img src="./readme/FridrichTrainerLogoHorizontal_500.png" alt="Fridrich Trainer thumbnail" width="350px">
+  </a>
 
----
+  <h3 align="center">Fridrich Trainer</h3>
 
-<h2 align="center">
-	Fridrich Trainer
-</h2>
+  <p align="center">
+    App to practice the most famous method to solve the Rubik's Cube - Fridrich - since the F2L to the OLL and the PLL. All in one simple and intuitive application. 
+    <br />
+    <br />
+    <a href="#️-download--installation">Download Project</a>
+    &middot;
+    <a href="#-getting-started-with-development">Start Developing</a>
+  </p>
 
-<p align="center">
-	Fridrich Trainer is an app to practice the most famous method to solve the Rubik's Cube. To improve since the F2L to the OLL and the PLL. All in one simple and intuitive application. Fridrich Trainer is also an open-source project so is possible anyone help since reporting bugs, writing code, documentation, giving ideas or just checking the <a href="https://www.github.com/Darguima/FridrichTrainer">homepage</a>.
-</p>
+<h4 align="center">
+⭐ Don't forget to Starring ⭐
+</h4>
 
-<br/>
+  <div align="center">
 
-<p align="center">
-	<img src="./readme/LandingPage.png" width="150px"/>
-	<img src="./readme/F2L_TrainPage.png" width="150px"/>
-	<img src="./readme/OLL_ConfigPage.png" width="150px"/>
-	<img src="./readme/PLL_ListCases.png" width="150px"/>
-</p>
+[![TypeScript][TypeScript-badge]][TypeScript-url]
+[![ReactNative][ReactNative-badge]][ReactNative-url]
 
----
+  </div>
 
-## Table of Contents
+  <p align="center">
+    <img  alt="Fridrich Trainer Media Landing" src="./readme/LandingPage.png" width="150px" height="300px"/>
+    <img  alt="Fridrich Trainer Media F2L" src="./readme/F2L_TrainPage.png" width="150px" height="300px"/>
+    <img  alt="Fridrich Trainer Media OLL" src="./readme/OLL_ConfigPage.png" width="150px" height="300px"/>
+    <img  alt="Fridrich Trainer Media PLL" src="./readme/PLL_ListCases.png" width="150px" height="300px"/>
+  </p>
+</div>
 
-- [Getting Started](#getting-started)
-- [Pages/Features](#pages/features)
-- [Technologies Used](#technologies-used)
-- [License](#license)
 
----
 
-## Getting Started
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>📋 Table of Contents</summary>
 
-### Prerequisites
+## 📋 Table of Contents
 
-- `Git` to clone the repository;
+- [About The Project](#-about-the-project)
+- [Download & Installation](#️-download--installation)
+- [Getting Started with Development](#-getting-started-with-development)
+- [Contributing](#-contributing)
+- [Developed by](#-developed-by)
+</details>
 
-- `Yarn` to install dependencies;
 
-- For run the project you will need the `Expo` Environment configured. You can follow the [Expo Official Documentation](https://docs.expo.io/get-started/installation/);
 
-- This project was only tested and developed for Android. So I don't know if it works properly in IOS. Is recommended that you run it in an `Android Phone`;
+## 🔍 About The Project
 
-### Cloning
+### 🎯 The goal
 
-- To start you can clone this repository to your local machine using:
+Fridrich Trainer is an app to practice the most famous method to solve the Rubik's Cube. To improve since the F2L to the OLL and the PLL. All in one simple and intuitive application.
 
-> `git clone https://github.com/Darguima/FridrichTrainer.git`
+### 📱 Pages
 
-### Installing Dependencies
+<details>
+  <summary>Click to expand pages</summary>
 
-- Now you can install all the dependencies with yarn:
-
-> `yarn`
-
-### Setup
-
-- To setup the application you can use:
-
-> `yarn start`
-
-### Running the App
-
-- Finally to run the App you only need to scan the QRCode (you need have the `Expo Go` App on your phone)
-
----
-
-## Pages/Features
-
-### Landing Page
+#### Landing Page
 
 <img src="./readme/LandingPage.png" width="30%" style='max-width:300px'/>
 
@@ -81,7 +72,7 @@
 
 ___
 
-### Train Page
+#### Train Page
 
 <div>
 	<img src="./readme/F2L_TrainPage_without_options.png" width="22%" style='max-width:300px'/>
@@ -90,49 +81,110 @@ ___
 	<img src="./readme/PLL_TrainPage.png" width="22%" style='max-width:300px'/>
 </div>
 
-* Is there where you will pass the most of the time
 * All of the 3 choices have the same layout and workflow, being the only difference the design of the cube simulations
 * In the header we 2 buttons to the `Config Page` and to the `List Cases`
-* There are also 2 buttons, one to show the cube simulation and other to show the solve
+* Here are also 2 buttons, one to show the cube simulation and other to show the solve
 
 ___
 
-### Config Page
+#### Config Page
 
 <img src="./readme/OLL_ConfigPage.png" width="30%" style='max-width:300px'/>
 
-* There you can choose what cases do you want that appear on the Train Page.
+* Here you can choose what cases do you want that appear on the Train Page.
 
 ___
 
-### List Cases
+#### List Cases
 
 <img src="./readme/PLL_ListCases.png" width="30%" style='max-width:300px'/>
 
 * To can have a little idea of the cases that we already done and whats we will do
 * We also can to reorganize the order of the cases
 
----
+</details>
 
-## Technologies Used
 
-- core
-	- JavaScript/TypeScript
-	- React Native
-	- Expo
 
-- navigation
-	- [React Navigation](https://github.com/react-navigation/react-navigation) - used to navigate between the screens
+## ⬇️ Download & Installation
 
-- storage
-	- [Async Storage](https://github.com/react-native-async-storage/async-storage) - to save what cases are selected on the `Config Page`
+Download the APK from the project's [Releases](https://github.com/darguima/FridrichTrainer/releases).
 
-- others
-	- [react-native-draggable-flatlist](https://github.com/computerjazz/react-native-draggable-flatlist) - used to create the `List Cases` page
-	- [Cube Simulator](https://github.com/Darguima/CubeSimulator) - used indirectly to create the SVGs to the cube simulations
-	- [react-native-svg](https://github.com/react-native-svg/react-native-svg) - used to load the SVGs of the cube simulation
 
----
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 🚀 Getting Started with Development
+
+To get a local copy up and running follow these simple example steps.
+
+### 1. Prerequisites
+
+Start by installing the following tools:
+
+- [Git](https://git-scm.com/downloads) - Version Control System
+- [Node.js](https://nodejs.org/en/download/) - JavaScript runtime
+- [Yarn](https://classic.yarnpkg.com/en/docs/install/) - Package manager
+
+- To run the project you will need the `Expo` Environment configured. You can follow the [Expo Official Documentation](https://docs.expo.io/get-started/installation/);
+
+- This project was only tested and developed for Android. So I don't know if it works properly in IOS. Is recommended that you run it in an `Android Phone`;
+
+### 2. Cloning
+
+Now clone the repository to your local machine. You can do this using Git:
+
+```bash
+$ git clone git@github.com:darguima/FridrichTrainer.git
+# or
+$ git clone https://github.com/darguima/FridrichTrainer.git
+```
+
+### 3. Dependencies
+
+Install the dependencies:
+
+```bash
+$ yarn
+```
+
+### 4. Setup
+
+To setup the application you can use
+
+```bash
+$ yarn start
+```
+
+Finally to run the App you only need to scan the QRCode (you need have the `Expo Go` App on your phone)
+
+
+
+## 🤝 Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+
+## 👨‍💻 Developed by
+
+- [Darguima](https://github.com/darguima)
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[project-thumbnail]: ./readme/FridrichTrainerLogoHorizontal_500.png
+
+[TypeScript-badge]: https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white
+[TypeScript-url]: https://www.typescriptlang.org
+
+[ReactNative-badge]: https://img.shields.io/badge/React%20Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[ReactNative-url]: https://reactnative.dev
